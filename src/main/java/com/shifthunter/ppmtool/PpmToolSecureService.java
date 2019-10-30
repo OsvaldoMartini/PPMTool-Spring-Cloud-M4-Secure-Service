@@ -13,10 +13,10 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @SpringBootApplication
 @RestController
 @EnableResourceServer
-public class PpmToolSpringCloudM4SecureServiceApplication {
+public class PpmToolSecureService {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PpmToolSpringCloudM4SecureServiceApplication.class, args);
+		SpringApplication.run(PpmToolSecureService.class, args);
 	}
 	
 	@RequestMapping("/tolldata")
