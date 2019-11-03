@@ -3,8 +3,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.shifthunter</groupId>
-	<artifactId>ppmtool</artifactId>
+	<groupId>com.shifthunter.ppmtool</groupId>
+	<artifactId>ppmtool-secure-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>PPMTool-Spring-Cloud-M4-Secure-Service</name>
 	<description>Testing Spring Cloud Secure Service</description>
