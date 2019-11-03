@@ -2,12 +2,16 @@ package com.shifthunter.ppmtool;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 
 
 @SpringBootApplication
@@ -19,7 +23,24 @@ public class PpmToolSecureService {
 		SpringApplication.run(PpmToolSecureService.class, args);
 	}
 	
+	
+	// Added to DO Some Checks
+	// Properties come from OAuth2
+	@Autowired
+	private ResourceServerProperties sso;
+
+	//added
+	// We are loading those props into CustomUserInfoTokenService to Inflate That token
+	// The Basic token we doesn't recognise the OAuth2, because of this we have the CustomUserInfoToken Class
+	// Now we can do PreAuthorize in "tollDAta"
+	@Bean
+	public ResourceServerTokenServices myUserInfoTokenServices() {
+		return new CustomUserInfoTokenService(sso.getUserInfoUri(), sso.getClientId());
+	}
+	
+	
 	@RequestMapping("/tolldata")
+	@PreAuthorize("#oauth2.hasScope('toll_read') and hasAuthority('ROLE_OPERATOR')")  //only 'omartini' can see this
 	public ArrayList<TollUsage> getTollData() {
 		
 		TollUsage instance1 = new TollUsage("200", "station150", "B65GT1W", "2016-09-30T06:31:22");

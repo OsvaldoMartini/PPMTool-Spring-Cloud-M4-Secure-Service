@@ -1,0 +1,17 @@
+package com.shifthunter.ppmtool;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
+import org.springframework.security.oauth2.provider.expression.OAuth2MethodSecurityExpressionHandler;
+
+@Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true)  //This Give US more control over who calls our services
+public class SecurityConfig extends GlobalMethodSecurityConfiguration {
+	@Override
+    protected MethodSecurityExpressionHandler createExpressionHandler() {
+        return new OAuth2MethodSecurityExpressionHandler();
+    }
+	
+}
